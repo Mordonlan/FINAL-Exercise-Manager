@@ -1,0 +1,55 @@
+---
+- name: Install Docker and Deploy Application
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install required packages
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - docker.io
+        state: present
+
+    - name: Start Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add ubuntu user to docker group
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes
+
+    - name: Create data directory
+      file:
+        path: /data
+        state: directory
+        mode: '0777'
+
+    - name: Pull Docker image
+      shell: docker pull mordo12/exercise-manager:latest
+
+    - name: Stop existing container
+      shell: docker stop exercise-manager || true
+
+    - name: Remove existing container
+      shell: docker rm exercise-manager || true
+
+    - name: Run application container
+      shell: |
+        docker run -d \
+          --name exercise-manager \
+          --restart always \
+          -p 30080:8000 \
+          -v /data:/data \
+          mordo12/exercise-manager:latest
