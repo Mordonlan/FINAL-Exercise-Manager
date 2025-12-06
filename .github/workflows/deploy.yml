@@ -19,7 +19,7 @@ jobs:
 
       - name: Basic validation
         run: |
-          cd python-app
+          cd "$APP_DIR"
           ls -la
           echo "Files validated"
 
