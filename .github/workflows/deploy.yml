@@ -31,9 +31,9 @@ jobs:
       - name: Run basic tests
         run: |
           cd python-app
-          python3 -c "import main; print('✅ Main imports successfully')"
-          python3 -c "import functions; print('✅ Functions imports successfully')"
-          python3 -c "from main import main; print('✅ Main function exists')"
+          python3 -c "import main; print(' Main imports successfully')"
+          python3 -c "import functions; print(' Functions imports successfully')"
+          python3 -c "from main import main; print(' Main function exists')"
 
   build-and-push:
     name: Build and Push Docker Image
@@ -89,6 +89,7 @@ jobs:
         run: |
           cd terraform
           terraform init
+
       - name: Debug SSH Key
         env:
           TF_VAR_public_key_content: ${{ secrets.SSH_PUBLIC_KEY }}
@@ -99,8 +100,8 @@ jobs:
           else
             echo " SSH_PUBLIC_KEY is set"
             echo "Key length: ${#TF_VAR_public_key_content} characters"
-            echo "Key starts with: ${TF_VAR_public_key_content:0:20}..."
-            echo "Key ends with: ...${TF_VAR_public_key_content: -20}"
+            echo "Key starts with: ${TF_VAR_public_key_content:0:30}..."
+            echo "Key ends with: ...${TF_VAR_public_key_content: -30}"
           fi
 
       - name: Terraform Plan
@@ -116,14 +117,19 @@ jobs:
         run: |
           cd terraform
           terraform apply -auto-approve
+          if [ $? -ne 0 ]; then
+            echo " Terraform apply failed!"
+            exit 1
+          fi
+          echo " Terraform apply succeeded"
 
       - name: Save Terraform Outputs
         id: terraform-output
         run: |
           cd terraform
-          echo "MASTER_IP=$(terraform output -raw master_public_ip)" >> $GITHUB_OUTPUT
-          echo "MASTER_PRIVATE_IP=$(terraform output -raw master_private_ip)" >> $GITHUB_OUTPUT
-          echo "LB_DNS=$(terraform output -raw load_balancer_dns)" >> $GITHUB_OUTPUT
+          echo "MASTER_IP=$(terraform output -raw master_public_ip 2>/dev/null || echo 'N/A')" >> $GITHUB_OUTPUT
+          echo "MASTER_PRIVATE_IP=$(terraform output -raw master_private_ip 2>/dev/null || echo 'N/A')" >> $GITHUB_OUTPUT
+          echo "LB_DNS=$(terraform output -raw load_balancer_dns 2>/dev/null || echo 'N/A')" >> $GITHUB_OUTPUT
           
           # Save outputs to file for next jobs
           terraform output -json > /tmp/terraform-outputs.json
@@ -136,7 +142,6 @@ jobs:
 
       - name: Upload Ansible inventory
         uses: actions/upload-artifact@v4
-
         with:
           name: ansible-inventory
           path: ansible/inventory.ini
