@@ -31,8 +31,8 @@ jobs:
       - name: Run basic tests
         run: |
           cd python-app
-          python3 -c "import app; print('✅ App imports successfully')"
-          python3 -c "from app import app; print('✅ Flask app created')"
+          python3 -c "import main; print('✅ Main imports successfully')"
+          python3 -c "from main import app; print('✅ Flask app created')"
 
   build-and-push:
     name: Build and Push Docker Image
