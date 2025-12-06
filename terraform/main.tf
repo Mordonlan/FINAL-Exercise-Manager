@@ -176,9 +176,8 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-# Key Pair (you need to create this manually or provide existing one)
 resource "aws_key_pair" "deployer" {
-  key_name   = "exercise-manager-key"
+  key_name   = "exercise-manager-key-new"  
   public_key = var.public_key_content
 }
 
