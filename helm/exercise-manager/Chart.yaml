@@ -1,0 +1,6 @@
+apiVersion: v2
+name: exercise-manager
+description: A Helm chart for exercise manager application 
+type: application
+version: 0.1.0
+appVersion: "1.0"

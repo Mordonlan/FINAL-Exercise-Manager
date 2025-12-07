@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exercise-manager
+  labels:
+    app: exercise-manager
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: exercise-manager
+  template:
+    metadata:
+      labels:
+        app: exercise-manager
+    spec:
+      containers:
+      - name: exercise-manager
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: DATA_FILE
+          value: "/data/exercises.json"
+        volumeMounts:
+        - name: nfs-storage
+          mountPath: /data
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: nfs-storage
+        persistentVolumeClaim:
+          claimName: {{ .Values.nfs.pvcName }}
