@@ -176,10 +176,10 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-resource "aws_key_pair" "deployer" {
-  key_name   = var.key_name  
-  public_key = var.public_key_content
+data "aws_key_pair" "deployer" {
+  key_name = "labsuser"
 }
+
 # EC2 Instances for Kubernetes
 resource "aws_instance" "k8s_nodes" {
   count                  = 3
