@@ -5,7 +5,7 @@
 [![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/)
 
-## 📋 Table of Contents
+##  Table of Contents
 
 1. [Project Overview](#project-overview)
 2. [Personal Details](#personal-details)
@@ -23,14 +23,14 @@
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 **Exercise Manager** is a comprehensive fitness tracking web application deployed on a highly available Kubernetes cluster in AWS. The application allows users to:
 
-- 📊 Track workout exercises with duration and calories burned
-- 💪 Calculate BMI and receive personalized fitness recommendations
-- 📁 Store data persistently using NFS-backed storage
-- 🌐 Access through a load-balanced, highly available infrastructure
+-  Track workout exercises with duration and calories burned
+-  Calculate BMI and receive personalized fitness recommendations
+-  Store data persistently using NFS-backed storage
+-  Access through a load-balanced, highly available infrastructure
 
 ### What Makes This Project Special:
 
@@ -42,62 +42,62 @@
 
 ---
 
-## 👤 Personal Details
+##  Personal Details
 
-- **Name**: [Your Name]
-- **ID**: [Your ID]
+- **Name**: Sean
+- **ID**: 213780646 technion student
 - **GitHub**: https://github.com/Mordonlan/FINAL-Exercise-Manager
 - **Docker Hub**: https://hub.docker.com/r/mordo12/exercise-manager
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
 ### Application Features:
-- ✅ Add, edit, and remove exercises
-- ✅ Track duration and calories for each exercise
-- ✅ Calculate BMI based on height and weight
-- ✅ View exercise statistics and totals
-- ✅ Dummy data preloaded for demonstration
-- ✅ Responsive web interface
+-  Add, edit, and remove exercises
+-  Track duration and calories for each exercise
+-  Calculate BMI based on height and weight
+-  View exercise statistics and totals
+-  Dummy data preloaded for demonstration
+-  Responsive web interface
 
 ### DevOps Features:
-- 🚀 **Automated CI/CD**: GitHub Actions pipeline
-- ☸️ **Kubernetes Orchestration**: 3-node cluster (1 master + 2 workers)
-- 📦 **Docker Containerization**: Multi-stage builds, health checks
-- 🏗️ **Infrastructure as Code**: Terraform + Ansible
-- ⚖️ **Load Balancing**: AWS Application Load Balancer
-- 💾 **Persistent Storage**: NFS shared storage
-- 🔍 **Health Monitoring**: Automated health checks
-- 📊 **High Availability**: Multiple replicas across worker nodes
+-  **Automated CI/CD**: GitHub Actions pipeline
+-  **Kubernetes Orchestration**: 3-node cluster (1 master + 2 workers)
+-  **Docker Containerization**: Multi-stage builds, health checks
+-  **Infrastructure as Code**: Terraform + Ansible
+-  **Load Balancing**: AWS Application Load Balancer
+-  **Persistent Storage**: NFS shared storage
+-  **Health Monitoring**: Automated health checks
+-  **High Availability**: Multiple replicas across worker nodes
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ### High-Level Architecture
 
 ```
-                    🌐 Internet
+                     Internet
                         ↓
-         ⚖️ Application Load Balancer (ALB) :80
+          Application Load Balancer (ALB) :80
                         ↓
-              🎯 Target Group :30080
+               Target Group :30080
                         ↓
     ┌───────────────────┴───────────────────┐
     ↓                                       ↓
-🖥️ Worker 1 (EC2)                    🖥️ Worker 2 (EC2)
-  📦 Pod 1 (App)                       📦 Pod 2 (App)
-  📦 Pod 2 (App)                       📦 Pod 3 (App)
+ Worker 1 (EC2)                     Worker 2 (EC2)
+   Pod 1 (App)                        Pod 2 (App)
+   Pod 2 (App)                        Pod 3 (App)
     ↓                                       ↓
     └───────────────────┬───────────────────┘
                         ↓
-           💾 NFS Server (Master Node)
+            NFS Server (Master Node)
               /srv/nfs/kubedata
                  exercises.json
                         ↑
                         |
-            🎮 Master Node (EC2)
+             Master Node (EC2)
                Kubernetes API
                NFS Server
 ```
@@ -113,7 +113,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Application:
 - **Backend**: Flask 3.0.0 (Python)
@@ -132,7 +132,7 @@
 
 ---
 
-## 📦 Prerequisites
+##  Prerequisites
 
 ### Required Tools:
 
@@ -179,7 +179,7 @@
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 FINAL-Exercise-Manager/
@@ -216,7 +216,7 @@ FINAL-Exercise-Manager/
 
 ---
 
-## 🚀 Deployment Guide
+##  Deployment Guide
 
 ### Step 1: Clone the Repository
 
@@ -321,7 +321,7 @@ http://<LOAD_BALANCER_DNS>
 
 ---
 
-## 🔄 CI/CD Pipeline
+##  CI/CD Pipeline
 
 The GitHub Actions pipeline automates the entire deployment process:
 
@@ -374,7 +374,7 @@ Go to repository Settings → Secrets → Actions:
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Health Check
 
@@ -425,7 +425,7 @@ docker logs exercise-manager
 
 ---
 
-## 🔧 Troubleshooting
+##  Troubleshooting
 
 ### Issue: 502 Bad Gateway
 
@@ -465,7 +465,7 @@ aws sts get-caller-identity
 
 ---
 
-## 📖 Application Usage
+##  Application Usage
 
 See [USER_GUIDE.md](USER_GUIDE.md) for detailed application usage instructions.
 
@@ -487,7 +487,7 @@ See [USER_GUIDE.md](USER_GUIDE.md) for detailed application usage instructions.
 
 ---
 
-## 🧹 Cleanup
+##  Cleanup
 
 ### Destroy all resources:
 
@@ -500,13 +500,13 @@ terraform destroy -auto-approve
 
 ---
 
-## 📝 License
+##  License
 
 This project is for educational purposes as part of the DevOps course final project.
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Mordo12**  
 GitHub: [@Mordonlan](https://github.com/Mordonlan)  
@@ -514,7 +514,7 @@ Docker Hub: [mordo12](https://hub.docker.com/u/mordo12)
 
 ---
 
-## 📚 Resources
+##  Resources
 
 - [Terraform Documentation](https://www.terraform.io/docs)
 - [Kubernetes Documentation](https://kubernetes.io/docs)
@@ -524,7 +524,7 @@ Docker Hub: [mordo12](https://hub.docker.com/u/mordo12)
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Course instructors for project requirements
 - DevOps community for best practices
@@ -532,4 +532,30 @@ Docker Hub: [mordo12](https://hub.docker.com/u/mordo12)
 
 ---
 
-**📧 Questions?** Open an issue on GitHub!
+** Questions?** Open an issue on GitHub!
+
+
+## Known Issue
+
+**Status:** Infrastructure deployed successfully, application has Docker image issue.
+
+### What Works 
+-  Terraform infrastructure (3 EC2, VPC, ALB, Target Groups)
+-  Ansible Kubernetes cluster (1 master, 2 workers - all Ready)
+-  GitHub Actions CI/CD pipeline (all stages pass)
+-  Helm deployment attempted
+-  Load Balancer accessible
+
+### Current Issue 
+-  Application pods crash due to incorrect Docker image
+-  Error: "Failed to find attribute 'app' in 'app'"
+-  Root cause: Docker image contains old CLI version instead of Flask web app
+
+### Evidence
+- Load Balancer URL: http://exercise-manager-alb-1192631837.us-east-1.elb.amazonaws.com
+- Returns 502 Bad Gateway (expected - pods unhealthy)
+- Infrastructure fully operational
+- See screenshots/ folder for proof of deployment
+
+### Next Steps
+Rebuild Docker image with correct Flask app.py and redeploy.
