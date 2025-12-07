@@ -58,9 +58,9 @@ jobs:
         run: |
           echo "Testing SSH key format..."
           if ssh-keygen -y -f ~/.ssh/id_rsa >/dev/null 2>&1; then
-            echo "✅ SSH key is valid"
+            echo " SSH key is valid"
           else
-            echo "❌ SSH key is invalid!"
+            echo " SSH key is invalid!"
             exit 1
           fi
 
@@ -74,8 +74,8 @@ jobs:
           cd ansible
           echo "Testing SSH connectivity to all hosts..."
           ansible all -i inventory.ini -m ping --private-key ~/.ssh/id_rsa || \
-            (echo "❌ SSH connectivity failed!" && exit 1)
-          echo "✅ SSH connectivity successful!"
+            (echo " SSH connectivity failed!" && exit 1)
+          echo " SSH connectivity successful!"
 
       - name: Deploy App with Ansible
         run: |
@@ -88,7 +88,7 @@ jobs:
             echo "Running docker-deploy.yml..."
             ansible-playbook -i inventory.ini docker-deploy.yml --private-key ~/.ssh/id_rsa
           else
-            echo "❌ No playbook found!"
+            echo " No playbook found!"
             ls -la
             exit 1
           fi
@@ -96,7 +96,7 @@ jobs:
       - name: Done
         run: |
           echo "============================================"
-          echo "✅ SUCCESS! App deployed!"
+          echo " SUCCESS! App deployed!"
           echo "============================================"
           echo ""
           echo "Application URL: http://${{ env.LB_DNS }}"
