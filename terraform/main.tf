@@ -177,10 +177,9 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_key_pair" "deployer" {
-  key_name   = "exercise-manager-key"
+  key_name   = var.key_name  
   public_key = var.public_key_content
 }
-
 # EC2 Instances for Kubernetes
 resource "aws_instance" "k8s_nodes" {
   count                  = 3
